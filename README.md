@@ -34,3 +34,42 @@ The counter starts from `0`, counts up to `7`, then down to `0`, and repeats thi
 
 - **Manual Direction Change**:
   - If the `reverse` signal is high (`1`) for **one clock cycle**, the current direction is flipped immediately.
+
+---
+
+## Directory Structure
+```
+pkhuang_up_down_counter_vip/
+├── design/
+│   └── dut.v
+│
+├── tb/
+│   ├── tb_top.sv
+│   ├── counter_interface.sv
+│   └── counter_package.sv
+│
+├── seq/
+│   └── counter_sequence.sv
+│
+├── config/
+│   └── counter_config.sv
+│
+├── src/
+│   ├── counter_env.sv
+│   ├── counter_agent.sv
+│   ├── counter_driver.sv
+│   ├── counter_sequencer.sv
+│   ├── counter_monitor.sv
+│   └── counter_seq_item.sv
+│
+├── scb/
+│   └── counter_scoreboard.sv
+│
+├── test/
+│   └── counter_base_test.sv
+│
+└── sim/
+    ├── run.f
+    ├── sim_top.f
+    └── Makefile
+```
