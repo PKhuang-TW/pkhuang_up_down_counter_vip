@@ -8,7 +8,7 @@ interface counter_interface #(
     input   wire    rst_n
 );
     logic                   reverse;
-    logic[ADDR_WIDTH-1:0]     counter;
+    logic[ADDR_WIDTH-1:0]   counter;
 endinterface
 
 `endif

@@ -58,7 +58,6 @@ pkhuang_up_down_counter_vip/
 │   ├── counter_env.sv
 │   ├── counter_agent.sv
 │   ├── counter_driver.sv
-│   ├── counter_sequencer.sv
 │   ├── counter_monitor.sv
 │   └── counter_seq_item.sv
 │
@@ -66,7 +65,7 @@ pkhuang_up_down_counter_vip/
 │   └── counter_scoreboard.sv
 │
 ├── test/
-│   └── counter_base_test.sv
+│   └── counter_test_base.sv
 │
 └── sim/
     ├── run.f

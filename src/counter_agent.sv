@@ -6,7 +6,7 @@ class counter_agent #(
 ) extends uvm_agent;
     `uvm_component_param_utils(counter_agent)
 
-    uvm_active_passive_enum agt_mode;
+    uvm_active_passive_enum             agt_mode;
 
     counter_monitor #(ADDR_WIDTH)       mon;
     counter_driver #(ADDR_WIDTH)        drv;
@@ -21,6 +21,8 @@ class counter_agent #(
 
         if ( !uvm_config_db #(uvm_active_passive_enum) :: get (this, "", "agt_mode", agt_mode) )
             `uvm_error ("NOCFG", $sformatf("No agt_mode set for %s.agt_mode", get_full_name()) )
+
+        uvm_config_db #(uvm_active_passive_enum) :: set (this, "mon", "agt_mode", agt_mode);
 
         mon = counter_monitor #(ADDR_WIDTH) :: type_id :: create ("mon", this);
         if (agt_mode == UVM_ACTIVE) begin
