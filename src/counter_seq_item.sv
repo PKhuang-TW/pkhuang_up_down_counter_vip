@@ -6,6 +6,8 @@ class counter_seq_item #(
 ) extends uvm_sequence_item;
 
     rand    bit             reverse;
+
+    bit                     rst;
     bit[ADDR_WIDTH-1:0]     counter;
 
     `uvm_object_param_utils_begin(counter_seq_item #(ADDR_WIDTH))

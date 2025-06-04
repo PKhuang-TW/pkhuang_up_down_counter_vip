@@ -27,8 +27,8 @@ class counter_env #(
     function connect_phase ( uvm_phase phase );
         super.connect_phase(phase);
 
-        agt_active.mon.port.connect(scb.imp);
-        agt_passive.mon.port.connect(scb.imp);
+        agt_active.mon.port.connect(scb.imp_active);
+        agt_passive.mon.port.connect(scb.imp_passive);
     endfunction
 
 endclass

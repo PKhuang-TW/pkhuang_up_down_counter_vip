@@ -37,17 +37,18 @@ class counter_monitor #(
 
         forever begin
             @(posedge vif.clk);
+            txn = TXN :: type_id :: create ("txn");
 
             if ( vif.rst_n ) begin
-                txn = TXN :: type_id :: create ("txn");
-
                 if ( agt_mode == UVM_ACTIVE ) begin
                     txn.reverse = vif.reverse;
                 end else begin  // agt_mode == UVM_PASSIVE
                     txn.counter = vif.counter;
                 end
-                port.write(txn);
+            end else begin
+                txn.rst = 1;
             end
+            port.write(txn);
         end
     endtask
 endclass

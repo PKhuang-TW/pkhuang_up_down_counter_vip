@@ -21,10 +21,10 @@ module tb_top;
         clk = 0;
         rst_n = 0;
 
-        #50;
+        #10;
         rst_n = 1;
 
-        uvm_config_db #(virtual counter_interface #(ADDR_WIDTH) :: set :: (uvm_root::get(), "uvm_test_top", "vif", vif ) );
+        uvm_config_db #(virtual counter_interface #(ADDR_WIDTH)) :: set :: ( uvm_root::get(), "uvm_test_top", "vif", vif );
 
         run_test("counter_test_base");
     end

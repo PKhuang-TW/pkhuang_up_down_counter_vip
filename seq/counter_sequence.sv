@@ -19,6 +19,7 @@ class counter_sequence #(
             txn = TXN :: type_id :: create ("txn");
             if ( !txn.randomize() )
                 `uvm_error( "RANDERR", "txn randomize error!")
+            txn.print();
             start_item(txn);
             finish_item(txn);
         end

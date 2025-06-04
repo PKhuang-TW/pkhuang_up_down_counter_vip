@@ -68,7 +68,7 @@ pkhuang_up_down_counter_vip/
 │   └── counter_test_base.sv
 │
 └── sim/
-    ├── run.f
-    ├── sim_top.f
-    └── Makefile
+    ├── compile.do
+    ├── run.do
+    └── run_modelsim.sh
 ```
