@@ -2,14 +2,13 @@
 `define COUNTER_CONFIG_SV
 
 class counter_config #(
-    parameter ADDR_WIDTH = counter_package::ADDR_WIDTH
+    parameter ADDR_WIDTH = 3
 ) extends uvm_object;
     `uvm_object_param_utils(counter_config #(ADDR_WIDTH))
     
-    typedef counter_config #(ADDR_WIDTH)    cfg_t;
-    typedef counter_interface #(ADDR_WIDTH) vif_t;
+    // typedef counter_config #(ADDR_WIDTH)    cfg_t;
 
-    vif_t   vif;
+    virtual counter_interface #(ADDR_WIDTH) vif;
 
     function new (string name = "counter_config");
         super.new(name);

@@ -2,7 +2,7 @@
 `define COUNTER_MONITOR_SV
 
 class counter_monitor #(
-    parameter ADDR_WIDTH = counter_package::ADDR_WIDTH
+    parameter ADDR_WIDTH = 3
 ) extends uvm_monitor;
     `uvm_component_param_utils(counter_monitor)
 
@@ -14,12 +14,14 @@ class counter_monitor #(
 
     uvm_analysis_port #(TXN)                port;
 
+    TXN                                     txn;
+
     function new (string name = "counter_monitor", uvm_component parent);
         super.new(name, parent);
         port = new("port", this);
     endfunction
 
-    function build_phase (uvm_phase phase);
+    function void build_phase (uvm_phase phase);
         super.build_phase(phase);
 
         if ( !uvm_config_db #(uvm_active_passive_enum) :: get (this, "", "agt_mode", agt_mode) )
@@ -32,9 +34,7 @@ class counter_monitor #(
     endfunction
 
     virtual task run_phase ( uvm_phase phase );
-        super.run_phase();
-        TXN     txn;
-
+        // TXN     txn;
         forever begin
             @(posedge vif.clk);
             txn = TXN :: type_id :: create ("txn");

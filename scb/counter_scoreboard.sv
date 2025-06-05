@@ -2,7 +2,7 @@
 `define COUNTER_SCOREBOARD_SV
 
 class counter_scoreboard #(
-    parameter   ADDR_WIDTH = counter_package::ADDR_WIDTH
+    parameter   ADDR_WIDTH = 3
 ) extends uvm_scoreboard;
     `uvm_component_param_utils(counter_scoreboard)
 
@@ -17,7 +17,7 @@ class counter_scoreboard #(
         super.new(name, parent);
     endfunction
 
-    function build_phase ( uvm_phase phase );
+    function void build_phase ( uvm_phase phase );
         super.build_phase(phase);
         imp_active = new("imp_active", this);
         imp_passive = new("imp_passive", this);
@@ -43,7 +43,7 @@ class counter_scoreboard #(
             end else if (up_en && counter == 'd7) begin
                 up_en = 0;
             end else if (!up_en && counter == 'd0) begin
-                up_end = 1;
+                up_en = 1;
             end
         end
 

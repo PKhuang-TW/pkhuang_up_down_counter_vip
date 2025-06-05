@@ -2,7 +2,7 @@
 `define COUNTER_AGENT_SV
 
 class counter_agent #(
-    parameter ADDR_WIDTH    = counter_package::ADDR_WIDTH
+    parameter ADDR_WIDTH    = 3
 ) extends uvm_agent;
     `uvm_component_param_utils(counter_agent)
 
@@ -16,7 +16,7 @@ class counter_agent #(
         super.new(name, parent);
     endfunction
 
-    function build_phase (uvm_phase phase);
+    function void build_phase (uvm_phase phase);
         super.build_phase(phase);
 
         if ( !uvm_config_db #(uvm_active_passive_enum) :: get (this, "", "agt_mode", agt_mode) )
@@ -31,7 +31,7 @@ class counter_agent #(
         end
     endfunction
 
-    function connect_phase (uvm_phase phase);
+    function void connect_phase (uvm_phase phase);
         super.connect_phase(phase);
         if (agt_mode == UVM_ACTIVE)
             drv.seq_item_port.connect(seqr.seq_item_export);

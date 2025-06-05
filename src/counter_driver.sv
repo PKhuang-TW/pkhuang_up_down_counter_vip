@@ -2,7 +2,7 @@
 `define COUNTER_DRIVER_SV
 
 class counter_driver #(
-    parameter   ADDR_WIDTH = counter_package::ADDR_WIDTH
+    parameter   ADDR_WIDTH = 3
 ) extends uvm_driver;
     `uvm_component_param_utils(counter_driver)
 
@@ -11,11 +11,13 @@ class counter_driver #(
     counter_config #(ADDR_WIDTH)                cfg;
     virtual counter_interface #(ADDR_WIDTH)     vif;
 
+    TXN                                         txn;
+
     function new (string name = "counter_driver", uvm_component parent);
         super.new(name, parent);
     endfunction
 
-    function build_phase (uvm_phase phase);
+    function void build_phase (uvm_phase phase);
         super.build_phase(phase);
 
         if ( !uvm_config_db #(counter_config #(ADDR_WIDTH)) :: get (this, "", "cfg", cfg) )
@@ -25,9 +27,7 @@ class counter_driver #(
     endfunction
 
     virtual task run_phase( uvm_phase phase );
-        super.run_phase();
-        TXN     txn;
-
+        // TXN     txn;
         forever begin
             @ ( posedge vif.clk );
             if ( vif.rst_n ) begin

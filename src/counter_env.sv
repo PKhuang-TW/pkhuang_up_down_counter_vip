@@ -2,7 +2,7 @@
 `define COUNTER_ENV_SV
 
 class counter_env #(
-    parameter   ADDR_WIDTH = counter_package::ADDR_WIDTH
+    parameter   ADDR_WIDTH = 3
 ) extends uvm_env;
     `uvm_component_param_utils(counter_env)
 
@@ -13,7 +13,7 @@ class counter_env #(
         super.new(name, parent);
     endfunction
 
-    function build_phase ( uvm_phase phase );
+    function void build_phase ( uvm_phase phase );
         super.build_phase(phase);
 
         uvm_config_db #(uvm_active_passive_enum) :: set (this, "agt_active", "agt_mode", UVM_ACTIVE);
@@ -24,7 +24,7 @@ class counter_env #(
         scb         = counter_scoreboard #(ADDR_WIDTH) :: type_id :: create ("scb", this);
     endfunction
 
-    function connect_phase ( uvm_phase phase );
+    function void connect_phase ( uvm_phase phase );
         super.connect_phase(phase);
 
         agt_active.mon.port.connect(scb.imp_active);

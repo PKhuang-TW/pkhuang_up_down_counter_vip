@@ -2,7 +2,7 @@
 `define COUNTER_INTERFACE_SV
 
 interface counter_interface #(
-    parameter ADDR_WIDTH = counter_package::ADDR_WIDTH
+    parameter ADDR_WIDTH = 3
 )(
     input   wire    clk,
     input   wire    rst_n
