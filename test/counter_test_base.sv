@@ -1,10 +1,12 @@
 `ifndef COUNTER_TEST_BASE_SV
 `define COUNTER_TEST_BASE_SV
 
-class counter_test_base extends uvm_test;
-    `uvm_component_param_utils(counter_test_base)
+import counter_package::*;
 
-    parameter ADDR_WIDTH = 3;
+class counter_test_base #(
+    parameter ADDR_WIDTH = counter_package::P_ADDR_WIDTH
+) extends uvm_test;
+    `uvm_component_param_utils(counter_test_base #(ADDR_WIDTH))
 
     counter_config #(ADDR_WIDTH)    cfg;
     counter_env #(ADDR_WIDTH)       env;
@@ -25,16 +27,6 @@ class counter_test_base extends uvm_test;
 
         uvm_config_db #(counter_config #(ADDR_WIDTH)) :: set (this, "*", "cfg", cfg);
     endfunction
-
-    virtual task run_phase ( uvm_phase phase );
-        // counter_sequence #(ADDR_WIDTH) seq;
-        seq = counter_sequence #(ADDR_WIDTH) :: type_id :: create ("seq");
-
-        phase.raise_objection(this);
-        seq.start ( env.agt_active.seqr );
-        #100ns;
-        phase.drop_objection(this);
-    endtask
 endclass
 
 `endif

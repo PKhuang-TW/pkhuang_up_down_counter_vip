@@ -1,8 +1,10 @@
 `ifndef COUNTER_SEQ_ITEM_SV
 `define COUNTER_SEQ_ITEM_SV
 
+import counter_package::*;
+
 class counter_seq_item #(
-    parameter ADDR_WIDTH = 3
+    parameter ADDR_WIDTH = P_ADDR_WIDTH
 ) extends uvm_sequence_item;
 
     rand    bit             reverse;

@@ -1,8 +1,10 @@
 `ifndef COUNTER_DRIVER_SV
 `define COUNTER_DRIVER_SV
 
+import counter_package::*;
+
 class counter_driver #(
-    parameter   ADDR_WIDTH = 3
+    parameter ADDR_WIDTH = P_ADDR_WIDTH
 ) extends uvm_driver;
     `uvm_component_param_utils(counter_driver)
 

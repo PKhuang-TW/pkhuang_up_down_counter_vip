@@ -1,8 +1,10 @@
 `ifndef COUNTER_AGENT_SV
 `define COUNTER_AGENT_SV
 
+import counter_package::*;
+
 class counter_agent #(
-    parameter ADDR_WIDTH    = 3
+    parameter ADDR_WIDTH = P_ADDR_WIDTH
 ) extends uvm_agent;
     `uvm_component_param_utils(counter_agent)
 

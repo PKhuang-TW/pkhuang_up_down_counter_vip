@@ -1,8 +1,10 @@
 `ifndef COUNTER_SEQUENCE_SV
 `define COUNTER_SEQUENCE_SV
 
+import counter_package::*;
+
 class counter_sequence #(
-    parameter   ADDR_WIDTH = 3
+    parameter ADDR_WIDTH = P_ADDR_WIDTH
 ) extends uvm_sequence #(counter_seq_item #(ADDR_WIDTH));
     `uvm_object_param_utils(counter_sequence)
 

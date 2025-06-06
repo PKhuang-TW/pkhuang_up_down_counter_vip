@@ -1,8 +1,10 @@
 `ifndef COUNTER_SCOREBOARD_SV
 `define COUNTER_SCOREBOARD_SV
 
+import counter_package::*;
+
 class counter_scoreboard #(
-    parameter   ADDR_WIDTH = 3
+    parameter ADDR_WIDTH = P_ADDR_WIDTH
 ) extends uvm_scoreboard;
     `uvm_component_param_utils(counter_scoreboard)
 

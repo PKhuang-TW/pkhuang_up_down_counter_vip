@@ -1,8 +1,10 @@
 `ifndef COUNTER_ENV_SV
 `define COUNTER_ENV_SV
 
+import counter_package::*;
+
 class counter_env #(
-    parameter   ADDR_WIDTH = 3
+    parameter ADDR_WIDTH = P_ADDR_WIDTH
 ) extends uvm_env;
     `uvm_component_param_utils(counter_env)
 

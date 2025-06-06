@@ -1,8 +1,10 @@
 `ifndef COUNTER_MONITOR_SV
 `define COUNTER_MONITOR_SV
 
+import counter_package::*;
+
 class counter_monitor #(
-    parameter ADDR_WIDTH = 3
+    parameter ADDR_WIDTH = P_ADDR_WIDTH
 ) extends uvm_monitor;
     `uvm_component_param_utils(counter_monitor)
 
