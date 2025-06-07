@@ -41,12 +41,10 @@ The counter starts from `0`, counts up to `7`, then down to `0`, and repeats thi
 ```
 pkhuang_up_down_counter_vip/
 ├── design/
-│   └── dut.v
+│   └── rtl.v
 │
 ├── tb/
-│   ├── tb_top.sv
-│   ├── counter_interface.sv
-│   └── counter_package.sv
+│   └── tb_top.sv
 │
 ├── seq/
 │   └── counter_sequence.sv
@@ -59,16 +57,15 @@ pkhuang_up_down_counter_vip/
 │   ├── counter_agent.sv
 │   ├── counter_driver.sv
 │   ├── counter_monitor.sv
-│   └── counter_seq_item.sv
+│   ├── counter_seq_item.sv
+│   ├── counter_interface.sv
+│   └── counter_package.sv
 │
 ├── scb/
 │   └── counter_scoreboard.sv
 │
-├── test/
-│   └── counter_test_base.sv
-│
-└── sim/
-    ├── compile.do
-    ├── run.do
-    └── run_modelsim.sh
+└── test/
+    ├── counter_test_base.sv
+    └── counter_test.sv
+
 ```
