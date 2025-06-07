@@ -13,6 +13,9 @@ class counter_scoreboard #(
 
     typedef counter_seq_item #(ADDR_WIDTH)      TXN;
 
+    counter_config #(ADDR_WIDTH)                cfg;
+    virtual counter_interface #(ADDR_WIDTH)     vif;
+
     bit                                         up_en;
     bit[ADDR_WIDTH-1:0]                         counter;
     TXN                                         q_passive[$];
@@ -29,27 +32,40 @@ class counter_scoreboard #(
         imp_passive = new("imp_passive", this);
         up_en = 1;
         counter = 0;
+
+        if ( !uvm_config_db #(counter_config #(ADDR_WIDTH)) :: get (this, "", "cfg", cfg) )
+            `uvm_error ("NOCFG", $sformatf("No cfg set for %s.cfg", get_full_name()) )
+
+        vif = cfg.vif;
     endfunction
+
+    virtual task void run_phase ( uvm_phase phase );
+        forever begin
+            @ ( posedge vif.clk );
+            
+            // counter
+            if ( (up_en && counter != 'd7) || (!up_en && counter == 'd0) ) begin
+                counter <= counter + 1;
+            end else begin
+                counter <= counter - 1;
+            end
+            
+            // up_en
+            if (up_en && counter == 'd7) begin
+                up_en <= 0;
+            end else if (!up_en && counter == 'd0) begin
+                up_en <= 1;
+            end
+        end
+    endtask
 
     virtual function void write_active ( TXN txn );
         if ( txn.rst ) begin
             up_en   = 'd1;
             counter = 'd0;
         end else begin
-            // counter
-            if ( (up_en && counter != 'd7) || (!up_en && counter == 'd0) ) begin
-                counter = counter + 1;
-            end else begin
-                counter = counter - 1;
-            end
-            
-            // up_en
             if ( txn.reverse ) begin
-                up_en = ~up_en;
-            end else if (up_en && counter == 'd7) begin
-                up_en = 0;
-            end else if (!up_en && counter == 'd0) begin
-                up_en = 1;
+                up_en <= ~up_en;
             end
         end
 
