@@ -14,8 +14,14 @@ import counter_package::*;
 `include "counter_agent.sv"
 `include "counter_scoreboard.sv"
 `include "counter_env.sv"
-`include "counter_sequence.sv"
 `include "counter_test_base.sv"
+
+`include "rand_reverse_seq.sv"
+`include "rand_reverse_test.sv"
+`include "always_reverse_seq.sv"
+`include "always_reverse_test.sv"
+`include "never_reverse_seq.sv"
+`include "never_reverse_test.sv"
 
 module tb_top;
 

@@ -11,8 +11,6 @@ class counter_test_base #(
     counter_config #(ADDR_WIDTH)    cfg;
     counter_env #(ADDR_WIDTH)       env;
 
-    counter_sequence #(ADDR_WIDTH)  seq;
-
     function new ( string name = "counter_test_base", uvm_component parent );
         super.new(name, parent);
     endfunction

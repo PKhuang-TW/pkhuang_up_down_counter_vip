@@ -9,11 +9,11 @@ class counter_seq_item #(
 
     rand    bit             reverse;
 
-    bit                     rst;
+    bit                     rst_n;
     bit[ADDR_WIDTH-1:0]     counter;
 
     `uvm_object_param_utils_begin(counter_seq_item #(ADDR_WIDTH))
-        `uvm_field_int(rst, UVM_ALL_ON)
+        `uvm_field_int(rst_n, UVM_ALL_ON)
         `uvm_field_int(reverse, UVM_ALL_ON)
         `uvm_field_int(counter, UVM_ALL_ON)
     `uvm_object_utils_end

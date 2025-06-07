@@ -47,10 +47,9 @@ pkhuang_up_down_counter_vip/
 │   └── tb_top.sv
 │
 ├── seq/
-│   └── counter_sequence.sv
-│
-├── config/
-│   └── counter_config.sv
+│   ├── rand_reverse_seq.sv
+│   ├── always_reverse_seq.sv
+│   └── never_reverse_seq.sv
 │
 ├── src/
 │   ├── counter_env.sv
@@ -59,13 +58,15 @@ pkhuang_up_down_counter_vip/
 │   ├── counter_monitor.sv
 │   ├── counter_seq_item.sv
 │   ├── counter_interface.sv
-│   └── counter_package.sv
+│   ├── counter_package.sv
+│   └── counter_config.sv
 │
 ├── scb/
 │   └── counter_scoreboard.sv
 │
 └── test/
     ├── counter_test_base.sv
-    └── counter_test.sv
-
+    ├── rand_reverse_test.sv
+    ├── always_reverse_test.sv
+    └── never_reverse_test.sv
 ```

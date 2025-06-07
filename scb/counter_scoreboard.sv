@@ -16,7 +16,7 @@ class counter_scoreboard #(
     counter_config #(ADDR_WIDTH)                cfg;
     virtual counter_interface #(ADDR_WIDTH)     vif;
 
-    bit                                         up_en;
+    bit                                         up_en, rst_n;
     bit[ADDR_WIDTH-1:0]                         counter;
     TXN                                         q_passive[$];
     uvm_analysis_imp_active #(TXN, counter_scoreboard #(ADDR_WIDTH))  imp_active;
@@ -30,7 +30,8 @@ class counter_scoreboard #(
         super.build_phase(phase);
         imp_active = new("imp_active", this);
         imp_passive = new("imp_passive", this);
-        up_en = 1;
+        rst_n   = 1;
+        up_en   = 1;
         counter = 0;
 
         if ( !uvm_config_db #(counter_config #(ADDR_WIDTH)) :: get (this, "", "cfg", cfg) )
@@ -43,36 +44,37 @@ class counter_scoreboard #(
         forever begin
             @ ( posedge vif.clk );
             
-            // counter
-            if ( (up_en && counter != 'd7) || (!up_en && counter == 'd0) ) begin
-                counter <= counter + 1;
+            if ( rst_n ) begin
+                // counter
+                if ( (up_en && counter != 'd7) || (!up_en && counter == 'd0) ) begin
+                    counter <= counter + 1;
+                end else begin
+                    counter <= counter - 1;
+                end
+                
+                // up_en
+                if (up_en && counter == 'd7) begin
+                    up_en <= 0;
+                end else if (!up_en && counter == 'd0) begin
+                    up_en <= 1;
+                end
             end else begin
-                counter <= counter - 1;
+                up_en   <= 'd1;
+                counter <= 'd0;
             end
-            
-            // up_en
-            if (up_en && counter == 'd7) begin
-                up_en <= 0;
-            end else if (!up_en && counter == 'd0) begin
-                up_en <= 1;
-            end
+
+            check_result();
         end
     endtask
 
     virtual function void write_active ( TXN txn );
-        if ( txn.rst ) begin
-            up_en   = 'd1;
-            counter = 'd0;
-        end else begin
-            if ( txn.reverse ) begin
-                up_en <= ~up_en;
-            end
+        if ( rst_n && txn.reverse ) begin
+            up_en <= ~up_en;
         end
-
-        check_result();
     endfunction
 
     virtual function void write_passive ( TXN txn );
+        rst_n = txn.rst_n;
         q_passive.push_back(txn);
     endfunction
 
