@@ -3,6 +3,9 @@
 
 import counter_package::*;
 
+`uvm_analysis_imp_decl(_active)
+`uvm_analysis_imp_decl(_passive)
+
 class counter_scoreboard #(
     parameter ADDR_WIDTH = P_ADDR_WIDTH
 ) extends uvm_scoreboard;
@@ -13,7 +16,8 @@ class counter_scoreboard #(
     bit                                         up_en;
     bit[ADDR_WIDTH-1:0]                         counter;
     TXN                                         q_passive[$];
-    uvm_analysis_imp#(TXN, counter_scoreboard)  imp_active, imp_passive;
+    uvm_analysis_imp_active #(TXN, counter_scoreboard #(ADDR_WIDTH))  imp_active;
+    uvm_analysis_imp_passive #(TXN, counter_scoreboard #(ADDR_WIDTH))  imp_passive;
 
     function new ( string name = "counter_scoreboard", uvm_component parent );
         super.new(name, parent);
@@ -27,7 +31,7 @@ class counter_scoreboard #(
         counter = 0;
     endfunction
 
-    virtual function write_imp_active ( TXN txn );
+    virtual function void write_active ( TXN txn );
         if ( txn.rst ) begin
             up_en   = 'd1;
             counter = 'd0;
@@ -52,7 +56,7 @@ class counter_scoreboard #(
         check_result();
     endfunction
 
-    virtual function write_imp_passive ( TXN txn );
+    virtual function void write_passive ( TXN txn );
         q_passive.push_back(txn);
     endfunction
 

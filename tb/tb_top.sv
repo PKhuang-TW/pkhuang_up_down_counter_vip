@@ -38,7 +38,9 @@ module tb_top;
 
         #10;
         rst_n = 1;
+    end
 
+    initial begin
         uvm_config_db #(virtual counter_interface #(P_ADDR_WIDTH)) :: set ( null, "uvm_test_top", "vif", vif );
 
         run_test("counter_test_base");

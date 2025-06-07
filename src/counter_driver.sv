@@ -5,8 +5,8 @@ import counter_package::*;
 
 class counter_driver #(
     parameter ADDR_WIDTH = P_ADDR_WIDTH
-) extends uvm_driver;
-    `uvm_component_param_utils(counter_driver)
+) extends uvm_driver #(counter_seq_item #(ADDR_WIDTH));
+    `uvm_component_param_utils(counter_driver #(ADDR_WIDTH))
 
     typedef counter_seq_item #(ADDR_WIDTH)      TXN;
 
