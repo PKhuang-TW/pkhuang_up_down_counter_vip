@@ -10,6 +10,7 @@ class counter_env #(
 
     counter_agent #(ADDR_WIDTH)         agt_active, agt_passive;
     counter_scoreboard #(ADDR_WIDTH)    scb;
+    counter_coverage #(ADDR_WIDTH)      cov;
 
     function new ( string name = "counter_env", uvm_component parent );
         super.new(name, parent);
@@ -24,6 +25,7 @@ class counter_env #(
         agt_active  = counter_agent #(ADDR_WIDTH) :: type_id :: create ("agt_active", this);
         agt_passive = counter_agent #(ADDR_WIDTH) :: type_id :: create ("agt_passive", this);
         scb         = counter_scoreboard #(ADDR_WIDTH) :: type_id :: create ("scb", this);
+        cov         = counter_coverage #(ADDR_WIDTH) :: type_id :: creage ("cov", this);
     endfunction
 
     function void connect_phase ( uvm_phase phase );
@@ -31,6 +33,9 @@ class counter_env #(
 
         agt_active.mon.port.connect(scb.imp_active);
         agt_passive.mon.port.connect(scb.imp_passive);
+
+        agt_active.mon.port.connect(cov.imp_active);
+        agt_passive.mon.port.connect(cov.imp_passive);
     endfunction
 
 endclass

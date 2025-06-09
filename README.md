@@ -27,10 +27,10 @@ The counter starts from `0`, counts up to `7`, then down to `0`, and repeats thi
 - **Normal Operation**:
   - When counting **up**:
     - Increments by 1 every clock cycle.
-    - Upon reaching value `6`, the direction automatically changes to **down**.
+    - Upon reaching value `7`, the direction automatically changes to **down**.
   - When counting **down**:
     - Decrements by 1 every clock cycle.
-    - Upon reaching value `1`, the direction automatically changes to **up**.
+    - Upon reaching value `0`, the direction automatically changes to **up**.
 
 - **Manual Direction Change**:
   - If the `reverse` signal is high (`1`) for **one clock cycle**, the current direction is flipped immediately.
@@ -42,6 +42,9 @@ The counter starts from `0`, counts up to `7`, then down to `0`, and repeats thi
 pkhuang_up_down_counter_vip/
 ├── design/
 │   └── rtl.v
+|
+├── cov/
+│   └── counter_coverage.sv
 │
 ├── tb/
 │   └── tb_top.sv

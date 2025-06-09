@@ -22,7 +22,6 @@ class always_reverse_test extends counter_test_base #(P_ADDR_WIDTH);
 
         phase.raise_objection(this);
         seq.start ( env.agt_active.seqr );
-        #100ns;
         phase.drop_objection(this);
     endtask
 endclass

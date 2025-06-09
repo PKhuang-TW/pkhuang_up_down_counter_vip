@@ -3,13 +3,13 @@
 
 import counter_package::*;
 
-`uvm_analysis_imp_decl(_active)
-`uvm_analysis_imp_decl(_passive)
-
 class counter_scoreboard #(
     parameter ADDR_WIDTH = P_ADDR_WIDTH
 ) extends uvm_scoreboard;
     `uvm_component_param_utils(counter_scoreboard)
+
+    `uvm_analysis_imp_decl(_active)
+    `uvm_analysis_imp_decl(_passive)
 
     typedef counter_seq_item #(ADDR_WIDTH)      TXN;
 

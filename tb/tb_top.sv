@@ -13,6 +13,7 @@ import counter_package::*;
 `include "counter_driver.sv"
 `include "counter_agent.sv"
 `include "counter_scoreboard.sv"
+`include "counter_coverage.sv"
 `include "counter_env.sv"
 `include "counter_test_base.sv"
 
