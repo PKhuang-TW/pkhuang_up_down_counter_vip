@@ -37,6 +37,12 @@ The counter starts from `0`, counts up to `7`, then down to `0`, and repeats thi
 
 ---
 
+### 📷 Counter Block Diagram
+
+![Counter Block Diagram](counter_diagram.png)
+
+---
+
 ## Directory Structure
 ```
 pkhuang_up_down_counter_vip/
